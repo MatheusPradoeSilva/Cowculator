@@ -1,6 +1,6 @@
 @font-face{
     font-family: Valley;
-    src: url(/font/Stardew_Valley.ttf);
+    src: url(../font/Stardew_Valley.ttf);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -16,10 +16,9 @@
 }
 
 body{
-    background-image: url(/img/fundo.jpg);
-    background-size: 100%;
-    width: 100%;
-    height: 100%;
+    background-image: url(../img/fundo.jpg);
+    background-size:100%;
+    background-repeat: no-repeat;
 }
 
 main{
@@ -27,7 +26,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10%;
+
 }
 
 .titulo{
@@ -49,18 +48,13 @@ main{
     justify-content: center;
 }
 
-.basica{
-    width: 199px;
-    height: 199px;
-    margin-top: 2.5%;
-    margin-left: 2.5%;
-    background: var(--cor-base);
-    border: 10px solid var(--cor-borda);
+.botao{
+    margin: 8%;
+    cursor: pointer;
+    width: 30%;
+    height: 30%;
 }
 
-.botao{
-    display: flex;
-    background: var(--cor-borda);
-    width: 210px;
-    height: 210px;
+.basica:hover{
+    height: 150%;
 }
