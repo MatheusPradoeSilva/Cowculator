@@ -3,7 +3,7 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size:small;
   color: #3f413d;
   margin: 0;
   padding: 0;
@@ -16,7 +16,8 @@
 
 :root{
   --cor-base: linear-gradient(#F9BB70, #E28F3D);
-  --cor-borda: #6B3710;
+  --cor-escura: #6B3710;
+  --cor-inversa: linear-gradient(#D16B1F, #6B3710);
 }
 
 .container {
@@ -36,7 +37,7 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3%;
+  margin: 1% 5%;
 }
 
 .voltar{
@@ -46,7 +47,7 @@ body{
   align-content: center;
   text-decoration: none;
   color: black;
-  border: solid 2px var(--cor-borda); 
+  border: solid 2px var(--cor-escura); 
   border-radius: 0.5rem;
   align-self: center;
   width: 5%;
@@ -60,14 +61,20 @@ body{
 }
 
 #display {
-  background-color: #F9BB70;
+  background-image: var(--cor-base);
+  font-family: stardew;
+  font-size: 250%;
+  color: var(--cor-escura);
+  font-weight: 100;
   padding: 15px;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   text-align: right;
   height: 10vh;
   align-self: center;
-  width: 96.5%;
+  width: 94%;
+  border: 8px solid;
+  border-image: var(--cor-inversa) 1;
 }
 
 .calculatorButtons{
@@ -76,10 +83,15 @@ body{
   border: none;
   margin-right: 0.5rem;
   margin-bottom: 0.9rem;
-  border-radius: 0.5rem;
-  background-color: #F9BB70;
-  box-shadow: 0 4px #6B3710;
+  background-image: var(--cor-base);
+  border: solid 10px var(--cor-escura);
   text-align: center;
+  font-size: 350%;
+  font-family: stardew;
+  color: var(--cor-escura);
+  border: 8px solid;
+  border-image: var(--cor-inversa) 1;
+  cursor: pointer;
 }
 
 .calculatorButtons:active {
@@ -88,8 +100,11 @@ body{
 }
 
 #cleanDisplay, #deleteDigit, #division, #multiplication, #subtraction, #sum, #result{
-  background-color: #6B3710;
-  color: #fdfffc;
+  background-image: var(--cor-inversa);
+  border: solid 10px #F9BB70;
+  color: #F9BB70;
+  border: 8px solid;
+  border-image: var(--cor-base) 1;
 }
 
 #result{
