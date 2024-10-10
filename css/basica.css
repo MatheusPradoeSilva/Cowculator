@@ -7,7 +7,16 @@
   color: #3f413d;
   margin: 0;
   padding: 0;
+}
 
+@font-face {
+  font-family: stardew;
+  src: url(../font/Stardew_Valley.ttf);
+} 
+
+:root{
+  --cor-base: linear-gradient(#F9BB70, #E28F3D);
+  --cor-borda: #6B3710;
 }
 
 .container {
@@ -23,6 +32,33 @@ body{
   background-repeat: no-repeat;
 }
 
+.cabecalho{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3%;
+}
+
+.voltar{
+  background-image: var(--cor-base);
+  font-family: stardew;
+  text-align: center;
+  align-content: center;
+  text-decoration: none;
+  color: black;
+  border: solid 2px var(--cor-borda); 
+  border-radius: 0.5rem;
+  align-self: center;
+  width: 5%;
+  height: 2rem;
+  transition: 0.2s;
+}
+
+.voltar:hover{
+  width: 5.5%;
+  height: 2.2rem;
+}
+
 #display {
   background-color: #F9BB70;
   padding: 15px;
@@ -30,7 +66,6 @@ body{
   margin-bottom: 0.5rem;
   text-align: right;
   height: 10vh;
-  margin-top: 6rem;
   align-self: center;
   width: 96.5%;
 }

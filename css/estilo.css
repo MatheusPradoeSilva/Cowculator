@@ -29,6 +29,12 @@ main{
 
 }
 
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .titulo{
     background-image: var(--cor-base); /*cor de fundo da letra gradiente*/
     color: black;
