@@ -19,6 +19,7 @@ body{
     background-image: url(../img/fundo.jpg);
     background-size:100%;
     background-repeat: no-repeat;
+    align-content: center;
 }
 
 main{
@@ -26,7 +27,6 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 .cabecalho{
@@ -46,6 +46,7 @@ main{
     font-weight: 1000;
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: #6B3710;
+    padding-top: 5px;
 }
 
 .area_botao{  

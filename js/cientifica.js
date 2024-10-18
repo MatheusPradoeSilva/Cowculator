@@ -3,10 +3,15 @@ var display = document.getElementById("display");
 var listenerBtn = [];
 
 // Botões de operador
-listenerBtn.push(document.getElementById("sum"));
-listenerBtn.push(document.getElementById("subtraction"));
-listenerBtn.push(document.getElementById("division"));
-listenerBtn.push(document.getElementById("multiplication"));
+listenerBtn.push(document.getElementById("seno"));
+listenerBtn.push(document.getElementById("cosseno"));
+listenerBtn.push(document.getElementById("tangente"));
+listenerBtn.push(document.getElementById("raiz"));
+listenerBtn.push(document.getElementById("raizn"));
+listenerBtn.push(document.getElementById("log"));
+listenerBtn.push(document.getElementById("divs"));
+listenerBtn.push(document.getElementById("pot2"));
+listenerBtn.push(document.getElementById("pot"));
 
 // Botões de números
 listenerBtn.push(document.getElementById("num0"));
@@ -47,117 +52,70 @@ btnCleanDisplay.onclick = function () {
 };
 
 function calculateResult() {
-    if (verifyOperator(display.value.substring(display.value.length - 1, display.value.length))) {
+    if (verifyOperator(display.value.slice(-1))) {
         deleteLastDigit(); // Ignora operador se estiver no final
     }
 
     var calculatedValue = calculateArray(display.value);
 
-    if (calculatedValue || calculatedValue == "0") {
+    if (calculatedValue !== undefined) {
         display.value = calculatedValue;
     }
 }
 
 function deleteLastDigit() {
     if (display.value.length > 0) {
-        if (display.value[display.value.length - 1] === ".") { // Reseta contador de pontos decimais
-            pointCounter = 0;
+        if (display.value[display.value.length - 1] === ".") {
+            pointCounter = 0; // Reseta contador de pontos decimais
         }
-        display.value = display.value.substring(0, display.value.length - 1);
+        display.value = display.value.slice(0, -1);
     }
 }
 
 function writeOnDisplay() {
-    lastDigit = this.value;
+    var lastDigit = this.value;
 
     if (verifyOperator(lastDigit)) {
         pointCounter = 0;
-        if (verifyOperator(display.value.substring(display.value.length - 1, display.value.length))) { // Substitui operador anterior
-            deleteLastDigit();
+        if (verifyOperator(display.value.slice(-1))) {
+            deleteLastDigit(); // Substitui operador anterior
         }
     }
 
-    if (verifyDecimalPoint(lastDigit) === true) {
+    if (verifyDecimalPoint(lastDigit)) {
         pointCounter++;
         if (pointCounter > pointLimit) {
-            return;
+            return; // Limita o número de pontos decimais
         }
     }
     display.value += lastDigit;
 }
 
 function verifyDecimalPoint(valorDigitado) {
-    if (valorDigitado === ".") {
-        return true;
-    } else {
-        return false; // Limita o número de pontos decimais
-    }
+    return valorDigitado === ".";
 }
 
-function verifyOperator(operatorValue) {
-    switch (operatorValue) {
-        case "*":
-            return true;
-        case "/":
-            return true;
-        case "+":
-            return true;
-        case "-":
-            return true;
-        default:
-            return false;
-    }
+function verifyOperator(value) {
+    return ["/", "^", "seno", "cosseno", "tangente", "raiz", "raizn", "log", "divs", "pot2", "pot"].includes(value);
 }
 
-function calculateArray(exp) {
-    exp = exp.toString().split("+");
-    for (a = 0; a < exp.length; a++) {
-        exp[a] = exp[a].split("-");
-        for (b = 0; b < exp[a].length; b++) {
-            exp[a][b] = exp[a][b].split("*");
-            for (c = 0; c < exp[a][b].length; c++) {
-                exp[a][b][c] = exp[a][b][c].split("/");
-                exp[a][b][c] = divideArray(exp[a][b][c]);
-            }
-            exp[a][b] = multiplyArray(exp[a][b]);
-        }
-        exp[a] = subtractArray(exp[a]);
-    }
-    exp = sumArray(exp);
+function calculateArray(expression) {
+    try {
+        // Substituições para funções
+        expression = expression.replace(/seno\(([^)]+)\)/g, (match, p1) => Math.sin(eval(p1) * Math.PI / 180));
+        expression = expression.replace(/cosseno\(([^)]+)\)/g, (match, p1) => Math.cos(eval(p1) * Math.PI / 180));
+        expression = expression.replace(/tangente\(([^)]+)\)/g, (match, p1) => Math.tan(eval(p1) * Math.PI / 180));
+        expression = expression.replace(/raiz\(([^)]+)\)/g, (match, p1) => Math.sqrt(eval(p1)));
+        expression = expression.replace(/raizn\(([^)]+),(\d+)\)/g, (match, p1, p2) => Math.pow(eval(p1), 1 / eval(p2)));
+        expression = expression.replace(/log\(([^)]+)\)/g, (match, p1) => Math.log(eval(p1)));
+        expression = expression.replace(/(\d+)\^(\d+)/g, (match, base, exponent) => Math.pow(eval(base), eval(exponent)));
 
-    return exp;
-}
-
-function multiplyArray(parameter) {
-    var resultMult = 1;
-    for (var x = 0; x < parameter.length; x++) {
-        resultMult *= parameter[x];
+        // Usa eval para calcular o resultado final
+        return eval(expression);
+    } catch (error) {
+        console.error("Erro ao calcular:", error);
+        return "Erro"; // Retorna mensagem de erro se o cálculo falhar
     }
-    return resultMult;
-}
-
-function divideArray(parameter) {
-    var resultDiv = parameter[0];
-    for (var x = 1; x < parameter.length; x++) {
-        resultDiv /= parameter[x];
-    }
-    return resultDiv;
-}
-
-function subtractArray(parameter) {
-    var resultSub = parameter[0];
-    for (var x = 1; x < parameter.length; x++) {
-        resultSub -= parameter[x];
-    }
-    return resultSub;
-}
-
-function sumArray(parameter) {
-    var resultSum = 0;
-    for (var x = 0; x < parameter.length; x++) {
-        resultSum += parameter[x];
-    }
-    return resultSum;
 }
 
 // Função para exibir o modal com a imagem
@@ -185,10 +143,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Mapeia operações para imagens
             const imageMap = {
-                "Divisão": "../img/divisao.png", 
-                "Multiplicação": "../img/multiplicacao.png", 
-                "Subtração": "../img/subtracao.png", 
-                "Adição": "../img/adicao.png"
+                "Seno": "../img/seno.png",
+                "Cosseno": "../img/cosseno.png", 
+                "Tangente": "../img/tangente.png", 
+                "Raiz Quadrada": "../img/raiz.png", 
+                "Raiz N-ésima": "../img/raiz n.png", 
+                "Logaritmo": "../img/log.png", 
+                "Potência": "../img/potencia.png", 
+                "Potência ao Quadrado": "../img/potencia n.png", 
+                "DivX": "../img/1 por x.png" 
             };
 
             const imageSrc = imageMap[operation] || ""; // Obtém o caminho da imagem
@@ -202,4 +165,3 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById('infoModal');
     modal.addEventListener("click", closeModal);
 });
-
