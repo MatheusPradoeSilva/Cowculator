@@ -109,6 +109,7 @@ function calculateArray(expression) {
         expression = expression.replace(/raizn\(([^)]+),(\d+)\)/g, (match, p1, p2) => Math.pow(eval(p1), 1 / eval(p2)));
         expression = expression.replace(/log\(([^)]+)\)/g, (match, p1) => Math.log(eval(p1)));
         expression = expression.replace(/(\d+)\^(\d+)/g, (match, base, exponent) => Math.pow(eval(base), eval(exponent)));
+        console.log(expression);
 
         // Usa eval para calcular o resultado final
         return eval(expression);
@@ -164,4 +165,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fecha o modal ao clicar fora da imagem
     const modal = document.getElementById('infoModal');
     modal.addEventListener("click", closeModal);
+
 });

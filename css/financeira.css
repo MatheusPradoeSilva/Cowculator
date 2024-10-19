@@ -13,12 +13,18 @@
 @font-face {
   font-family: stardew;
   src: url(../font/Stardew_Valley.ttf);
+}
+
+@font-face{
+  font-family: minecraft;
+  src: url(../font/Minecraft.ttf);
 } 
 
 :root{
   --cor-base: linear-gradient(#F9BB70, #E28F3D);
   --cor-escura: #6B3710;
   --cor-inversa: linear-gradient(#D16B1F, #6B3710);
+  --icone-info: #64E4E8;
 }
 
 .container {
@@ -48,27 +54,27 @@ body{
 .voltar{
   background-image: var(--cor-base);
   font-family: stardew;
+  font-size: 190%;
   text-align: center;
   align-content: center;
   text-decoration: none;
-  color: black;
+  color: #6B3710;
   border: solid 2px var(--cor-escura); 
   border-radius: 0.5rem;
   align-self: center;
-  width: 5%;
-  height: 2rem;
+  width: 8%;
+  height: 3rem;
   transition: 0.2s;
 }
 
-
 .voltar:hover{
-  width: 5.5%;
-  height: 2.2rem;
+  width: 10%;
+  height: 3.3rem;
 }
 
 #display {
   background-image: var(--cor-base);
-  font-family: stardew;
+  font-family: minecraft;
   font-size: 250%;
   color: var(--cor-escura);
   font-weight: 100;
@@ -118,8 +124,9 @@ body{
 #result{
   height: 5.5rem;
   width: 31rem;
-  
+  font-family: minecraft;
 }
+
 
 #num0{
   width: 15rem;
@@ -149,7 +156,7 @@ body{
   top: -10px;
   right: -300px;
   cursor: pointer;
-  color: #F9BB70;
+  color: var(--icone-info);
 }
 /* Estilo do modal */
 .modal {
