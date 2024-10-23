@@ -1,4 +1,7 @@
 var display = document.getElementById("display");
+var valor = document.getElementById("valorReais");
+var tempo = document.getElementById("mes/ano");
+var juros = document.getElementById("valorJuros");
 
 var listenerBtn = [];
 
@@ -95,8 +98,26 @@ function verifyDecimalPoint(valorDigitado) {
 function verifyOperator(value) {
     return ["valor", "valorJuros", "tempo"].includes(value);
 }
+function calcular() {
+    // Obtém os valores do formulário
+    let capitalInicial = parseFloat(valor.value);   // valor inicial
+    let taxaDeJuros = parseFloat(juros.value)/100;      // taxa de juros
+    let quantidadeMeses = parseInt(tempo.value);    // tempo em meses
 
+    // Validação de entrada
+    if (isNaN(capitalInicial) || isNaN(taxaDeJuros) || isNaN(quantidadeMeses) || capitalInicial <= 0 || taxaDeJuros < 0 || quantidadeMeses <= 0) {
+        console.log("Por favor, insira valores válidos.");
+        display.value = "Erro: Valores inválidos";
+        return;
+    }
 
+    // Cálculo do montante usando Math.pow()
+    let montante = capitalInicial * Math.pow(1 + taxaDeJuros, quantidadeMeses);
+
+    // Exibe o resultado formatado
+    console.log("Montante: " + montante.toFixed(2));
+    display.value = montante.toFixed(2);  // Mostra o montante com 2 casas decimais
+}
 
 
 // Função para exibir o modal com a imagem

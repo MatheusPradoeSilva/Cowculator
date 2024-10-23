@@ -32,9 +32,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 0.3%;
-  
-  
+  margin: 0.3%;  
 }
 
 body{
@@ -127,26 +125,24 @@ body{
   font-family: minecraft;
 }
 
-
 #num0{
   width: 15rem;
 }
 
-.button-functions {
+.input-functions {
   background-image: var(--cor-inversa);
-  
   color: #F9BB70;
   border: 8px solid;
   border-image: var(--cor-base) 1;
-  width: 31rem;
-  height: 5.5rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.9rem;
+  width: 80%;
   text-align: left;
   font-size: 350%;
   font-family: stardew;
   cursor: pointer;
+}
 
+.input-functions::-webkit-inner-spin-button{
+  -webkit-appearance: none;
 }
 
 
