@@ -6,8 +6,8 @@ var juros = document.getElementById("valorJuros");
 var listenerBtn = [];
 
 // Botões de operador
-listenerBtn.push(document.getElementById("valor"));
-listenerBtn.push(document.getElementById("tempo"));
+listenerBtn.push(document.getElementById("valorReais"));
+listenerBtn.push(document.getElementById("mes/ano"));
 listenerBtn.push(document.getElementById("valorJuros"));
 
 // Botões de números
@@ -27,16 +27,13 @@ var btnResult = document.getElementById("result");
 var btnCleanDisplay = document.getElementById("cleanDisplay");
 var btnDeleteDigit = document.getElementById("deleteDigit");
 
+
 var pointCounter = 0;
 var pointLimit = 1;
 
 for (var i = 0; i < listenerBtn.length; i++) {
     listenerBtn[i].addEventListener("click", writeOnDisplay);
 }
-
-btnResult.onclick = function () {
-    calculateResult();
-};
 
 btnDeleteDigit.onclick = function () {
     deleteLastDigit();
@@ -99,26 +96,25 @@ function verifyOperator(value) {
     return ["valor", "valorJuros", "tempo"].includes(value);
 }
 function calcular() {
-    // Obtém os valores do formulário
-    let capitalInicial = parseFloat(valor.value);   // valor inicial
+    //valores do formulário
+    let capital = parseFloat(valor.value);   // valor inicial
     let taxaDeJuros = parseFloat(juros.value)/100;      // taxa de juros
     let quantidadeMeses = parseInt(tempo.value);    // tempo em meses
 
     // Validação de entrada
-    if (isNaN(capitalInicial) || isNaN(taxaDeJuros) || isNaN(quantidadeMeses) || capitalInicial <= 0 || taxaDeJuros < 0 || quantidadeMeses <= 0) {
+    if (isNaN(capital) || isNaN(taxaDeJuros) || isNaN(quantidadeMeses) || capital <= 0 || taxaDeJuros < 0 || quantidadeMeses <= 0) {
         console.log("Por favor, insira valores válidos.");
         display.value = "Erro: Valores inválidos";
         return;
     }
 
     // Cálculo do montante usando Math.pow()
-    let montante = capitalInicial * Math.pow(1 + taxaDeJuros, quantidadeMeses);
+    let montante = capital * Math.pow(1 + taxaDeJuros, quantidadeMeses);
 
     // Exibe o resultado formatado
     console.log("Montante: " + montante.toFixed(2));
     display.value = montante.toFixed(2);  // Mostra o montante com 2 casas decimais
 }
-
 
 // Função para exibir o modal com a imagem
 function showModal(imageSrc) {
@@ -147,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const imageMap = {
                 "valor": "../img/valor.png", 
                 "tempo": "../img/tempo.png", 
-                "valorJuros": "../img/juros.png", 
+                "juros": "../img/juros.png", 
             };
 
             const imageSrc = imageMap[operation] || ""; // Obtém o caminho da imagem

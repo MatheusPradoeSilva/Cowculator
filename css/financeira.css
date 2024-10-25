@@ -103,7 +103,6 @@ body{
   border: 8px solid;
   border-image: var(--cor-inversa) 1;
   cursor: pointer;
-  
 }
 
 .calculatorButtons:active {
@@ -134,25 +133,31 @@ body{
   color: #F9BB70;
   border: 8px solid;
   border-image: var(--cor-base) 1;
-  width: 80%;
+  width: 82.5%;
   text-align: left;
   font-size: 350%;
   font-family: stardew;
   cursor: pointer;
 }
 
+.input-functions::placeholder{
+  color:#F9BB70;
+}
+
+tr{
+  align-self:center;
+}
+
 .input-functions::-webkit-inner-spin-button{
   -webkit-appearance: none;
 }
 
-
 .info-icon {
-  font-size: 0.7em;
+  font-size: 1.7em;
   position: relative;
-  top: -10px;
-  right: -300px;
   cursor: pointer;
   color: var(--icone-info);
+  left: 38.5%;
 }
 /* Estilo do modal */
 .modal {
