@@ -123,7 +123,6 @@ function calculateArray(expression) {
         // Substituições para funções
         expression = expression.replace(/raiz\(([^)]+)\)/g, (match, p1) => Math.sqrt(eval(p1)));
         expression = expression.replace(/raizn\(([^)]+),(\d+)\)/g, (match, p1, p2) => Math.pow(eval(p1), 1 / eval(p2)));
-        expression = expression.replace(/log\(([^)]+)\)/g, (match, p1) => Math.log(eval(p1)));
         expression = expression.replace(/(\d+)\^(\d+)/g, (match, base, exponent) => Math.pow(eval(base), eval(exponent)));
         console.log(expression);
 
@@ -150,16 +149,16 @@ function calculateArray(expression) {
                 expression = expression.replace(/tangente\(([^)]+)\)/g, (match, p1) => Math.tan(eval(p1) * Math.PI / 180));
                 verificador = 0;
              }
-             else{
+             else if(verificador == 5){
                 expression = expression+")"
                 console.log(expression);
-                expression = expression.replace(/seno\(([^)]+)\)/g, (match, p1) => Math.sin(eval(p1) * Math.PI / 180));
+                expression = expression.replace(/log\(([^)]+)\)/g, (match, p1) => Math.log10(eval(p1)));
                 verificador = 0;
              }
              
 
         // Usa eval para calcular o resultado final
-        return eval(expression);
+        return eval(expression).toFixed(4);
     } catch (error) {
         console.error("Erro ao calcular:", error);
         return "Erro"; // Retorna mensagem de erro se o cálculo falhar
